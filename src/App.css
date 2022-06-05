@@ -28,6 +28,13 @@
   color: #61dafb;
 }
 
+/*********************************/
+.timer-label{
+  border: solid black;
+  border-width: 7px;
+}
+/*********************************/
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
