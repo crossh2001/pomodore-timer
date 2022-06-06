@@ -1,23 +1,34 @@
 import '../App.css';
+import {useState} from 'react';
 
 export const Session = () =>{
 
-    const work = () =>{
-        console.log("this works");
+    const [count, setCount]=useState(25);
+    //const count=5;
+
+    const addSession = () =>{
+        setCount(count => count+1);
+        console.log("add "+count);
     }
+
+    const subtractSession = () =>{
+        setCount(count => count-1);
+        console.log("subtract "+count);
+    }
+
 
     return(
         <>
                 <h2 id="session-label">Session Length</h2>
                 <img id="session-decrement" 
                 src="https://www.seekpng.com/png/detail/80-802840_green-arrow-computer-icons-symbol-icon-design-green.png"
-                 width="20px" height="20px" onClick={()=>work()}/>
+                 width="20px" height="20px" onClick={()=>subtractSession()}/>
 
-                <div id="session-length">25</div>
+                <div id="session-length">{count}</div>
 
                 <img id="session-increment" 
                 src="https://www.pngitem.com/pimgs/m/29-297862_green-arrow-up-green-arrow-icon-png-transparent.png"
-                 width="20px" height="20px" onClick={()=>work()}/>
+                 width="20px" height="20px" onClick={()=>addSession()}/>
 
                  <div></div>
 
