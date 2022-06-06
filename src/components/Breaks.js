@@ -1,19 +1,16 @@
 import '../App.css';
 import {useState} from 'react';
 
-export const Breaks = () =>{
+export const Breaks = ({setBreakCount,breakCount}) =>{
 
-    const [count, setCount]=useState(5);
-    //const count=5;
-
-    const addBreaks = () =>{
-        setCount(count => count+1);
-        console.log("add "+count);
+        const addBreaks = () =>{
+        setBreakCount(breakCount => breakCount+1);
+        console.log("add "+breakCount);
     }
 
     const subtractBreaks = () =>{
-        setCount(count => count-1);
-        console.log("subtract "+count);
+        setBreakCount(breakCount => breakCount-1);
+        console.log("subtract "+breakCount);
     }
 
     
@@ -25,7 +22,7 @@ export const Breaks = () =>{
                 width="20px" height="20px"
                 onClick={()=>subtractBreaks()}/>
 
-                <div id="break-length">{count}</div>
+                <div id="break-length">{breakCount}</div>
 
                 <img id="break-increment" 
                 src="https://www.pngitem.com/pimgs/m/29-297862_green-arrow-up-green-arrow-icon-png-transparent.png" 

@@ -1,10 +1,8 @@
 import '../App.css';
 import {useState} from 'react';
 
-export const Session = () =>{
+export const Session = ({setCount, count}) =>{
 
-    const [count, setCount]=useState(25);
-    //const count=5;
 
     const addSession = () =>{
         setCount(count => count+1);
