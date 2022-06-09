@@ -14,7 +14,8 @@ function App() {
       25 + 5 Clock
       <Break setBreakCount={setBreakCount} breakCount={breakCount}/>
       <Session setCount={setCount} count={count}/>
-      <Timer breakCount={breakCount} count={count}/>
+      <Timer setBreakCount={setBreakCount} breakCount={breakCount} 
+      setCount={setCount} count={count}/>
          </div>
   );
 }
