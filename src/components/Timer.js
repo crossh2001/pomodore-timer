@@ -38,31 +38,30 @@ export const Timer = ({setBreakCount, breakCount, setCount, count}) =>{
         }, 1000);
     }*/
 
+    let toggle=0;
+
+    
     const start_stop1 = () => {
-        let interval = setInterval(start_stop, 1000);    
-        console.log("function called");
-        console.log(min+" : "+sec);
-    }
-    let interval = setInterval(start_stop, 1000);
         
-
-    function start_stop(){
-        clearInterval(interval);
-
-            if(sec === 0){
-                if(min!==0){
-                    //sec=59;
-                    //min=min-1;
+        let interval = setInterval(function(){
+        console.log(min+" : "+sec);
+            if(sec == 0){
+                if(min!=0){
+                    sec=59;
+                    min=min-1;
                     setSeconds(59);
-                    setCount(min-1);
+                    setCount(min);
                 }
             }else{
-                //sec=sec-1;
+                sec=sec-1;
                 setSeconds(sec-1);
             }
+        }, 1000);    
+        
     }
-
+    
     const reset = () =>{
+        clearInterval();
         setBreakCount(5);
         setCount(25);
         console.log("Session: "+count+"  Break: " +breakCount);
