@@ -5,35 +5,9 @@ export const Timer = ({ setBreakCount, breakCount, setCount, count }) => {
   let interval = useRef();
 
   let min = count;
+  let bmin= breakCount;
   let sec = seconds;
 
-  /*useEffect(()=>{
-    
-        let interval = setInterval(()=>{
-            clearInterval(interval);
-
-            if(sec === 0){
-                if(min!==0){
-                    sec=59;
-                    min=min-1;
-                }
-            }
-        }, 1000);
-
-    }, sec)*/
-
-  /*const start_stop = () =>{
-        let interval = setInterval(()=>{
-            //clearInterval(interval);
-
-            if(sec === 0){
-                if(min!==0){
-                    sec=59;
-                    min=min-1;
-                }
-            }
-        }, 1000);
-    }*/
 
   let toggle = 0;
   console.log("Hi :)", toggle);
@@ -55,7 +29,14 @@ export const Timer = ({ setBreakCount, breakCount, setCount, count }) => {
                 setSeconds(59);
                 setCount(min);
               }else{
-
+                if(sec==0){
+                  if(bmin != 0){
+                    sec = 59;
+                    bmin = bmin - 1;
+                    setSeconds(59);
+                    setBreakCount(bmin);
+                  }
+                }
               }
             } else {
               sec = sec - 1;
