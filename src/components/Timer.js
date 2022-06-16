@@ -38,21 +38,30 @@ export const Timer = ({ setBreakCount, breakCount, setCount, count }) => {
   let toggle = 0;
 
   const start_stop1 = () => {
+    if(toggle>1){
+      toggle=0;
+    }else{
+      toggle=1+toggle;
+    }
     clearInterval(interval?.current);
-    interval.current = setInterval(function () {
-      console.log(min + ' : ' + sec);
-      if (sec == 0) {
-        if (min != 0) {
-          sec = 59;
-          min = min - 1;
-          setSeconds(59);
-          setCount(min);
+        if(toggle==0){
+          interval.current = setInterval(function () {
+            console.log(min + ' : ' + sec);
+            if (sec == 0) {
+              if (min != 0) {
+                sec = 59;
+                min = min - 1;
+                setSeconds(59);
+                setCount(min);
+              }
+            } else {
+              sec = sec - 1;
+              setSeconds(sec - 1);
+            }
+          }, 1000);
+        }else{
+          toggle=toggle+1;
         }
-      } else {
-        sec = sec - 1;
-        setSeconds(sec - 1);
-      }
-    }, 1000);
     console.log(interval, 'interval');
   };
 
