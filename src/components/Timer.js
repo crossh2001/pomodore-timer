@@ -36,6 +36,7 @@ export const Timer = ({ setBreakCount, breakCount, setCount, count }) => {
     }*/
 
   let toggle = 0;
+  console.log("Hi :)", toggle);
 
   const start_stop1 = () => {
     if(toggle>1){
@@ -53,6 +54,8 @@ export const Timer = ({ setBreakCount, breakCount, setCount, count }) => {
                 min = min - 1;
                 setSeconds(59);
                 setCount(min);
+              }else{
+
               }
             } else {
               sec = sec - 1;
