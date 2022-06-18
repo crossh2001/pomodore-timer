@@ -5,13 +5,17 @@ export const Session = ({setCount, count}) =>{
 
 
     const addSession = () =>{
-        setCount(count => count+1);
-        console.log("add "+count);
+        if(count<60){
+            setCount(count => count+1);
+            console.log("add "+count);
+        }
     }
 
     const subtractSession = () =>{
-        setCount(count => count-1);
-        console.log("subtract "+count);
+        if(count>1){
+            setCount(count => count-1);
+            console.log("subtract "+count);
+        }
     }
 
 

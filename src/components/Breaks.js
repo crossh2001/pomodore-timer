@@ -4,13 +4,17 @@ import {useState} from 'react';
 export const Breaks = ({setBreakCount,breakCount}) =>{
 
         const addBreaks = () =>{
-        setBreakCount(breakCount => breakCount+1);
-        console.log("add "+breakCount);
+        if(breakCount<60){
+            setBreakCount(breakCount => breakCount+1);
+            console.log("add "+breakCount);
+        }
     }
 
     const subtractBreaks = () =>{
-        setBreakCount(breakCount => breakCount-1);
-        console.log("subtract "+breakCount);
+        if(breakCount>1){
+            setBreakCount(breakCount => breakCount-1);
+            console.log("subtract "+breakCount);
+        }
     }
 
     
