@@ -1,5 +1,7 @@
 import '../App.css';
 import { useEffect, useRef, useState } from 'react';
+import clip from "./mixkit-sport-start-bleeps-918.wav";
+
 export const Timer = ({ setBreakCount, breakCount, setCount, count }) => {
   const [seconds, setSeconds] = useState(0);
   const [title, setTitle] = useState("Session");
@@ -10,6 +12,7 @@ export const Timer = ({ setBreakCount, breakCount, setCount, count }) => {
   let sec = seconds;
   //let title = "Session";
   let changeTitle = 0;
+  const beeping = new Audio(clip);
 
   if(sec<10){
     sec="0"+seconds;
@@ -65,12 +68,18 @@ export const Timer = ({ setBreakCount, breakCount, setCount, count }) => {
                     setSeconds(59);
                     setBreakCount(bmin);
                     
-                  }.,
+                  }
                 }
               }
             } else {
               sec = sec - 1;
               setSeconds(sec);
+            }
+
+            if(sec== 0 && min == 0){
+              beeping.play();
+              changeTitle=1;
+              console.log("reached audio");
             }
           }, 1000);
         }else{
@@ -84,6 +93,7 @@ export const Timer = ({ setBreakCount, breakCount, setCount, count }) => {
     setBreakCount(5);
     setCount(25);
     setSeconds(0);
+    setTitle("Session");
     console.log('Session: ' + count + '  Break: ' + breakCount);
   };
 
@@ -92,6 +102,9 @@ export const Timer = ({ setBreakCount, breakCount, setCount, count }) => {
       <div id="timer-label">{title}</div>
       <div id="time-left">
         {min}:{sec}
+        <audio>
+          <source src="./beep-06.wav" />
+        </audio>
       </div>
 
       <img
