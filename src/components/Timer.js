@@ -10,9 +10,10 @@ export const Timer = ({ setBreakCount, breakCount, setCount, count }) => {
   let min = count;
   let bmin= breakCount;
   let sec = seconds;
-  //let title = "Session";
   let changeTitle = 0;
   const beeping = new Audio(clip);
+  const session_length = min;
+  const break_length = bmin;
 
   if(sec<10){
     sec="0"+seconds;
@@ -28,8 +29,7 @@ export const Timer = ({ setBreakCount, breakCount, setCount, count }) => {
 
 
   let toggle = 0;
-  console.log("Hi :)", toggle);
-
+  
   const start_stop1 = () => {
 
     if(toggle>1){
@@ -45,7 +45,6 @@ export const Timer = ({ setBreakCount, breakCount, setCount, count }) => {
 
             if(changeTitle>1){
               changeTitle=0;
-              console.log("changeTitle got called "+changeTitle);
             }
 
             if(changeTitle==0){
@@ -79,8 +78,19 @@ export const Timer = ({ setBreakCount, breakCount, setCount, count }) => {
             if(sec== 0 && min == 0){
               beeping.play();
               changeTitle=1;
-              console.log("reached audio");
+              bmin=break_length;
             }
+
+            console.log("after loop bmin "+bmin);
+
+            if(sec== 0 && bmin == 0){
+              beeping.play();
+              changeTitle=0;
+              min=session_length;
+            }
+
+            console.log("after loop min is "+min);
+
           }, 1000);
         }else{
           toggle=toggle+1;
@@ -102,8 +112,8 @@ export const Timer = ({ setBreakCount, breakCount, setCount, count }) => {
       <div id="timer-label">{title}</div>
       <div id="time-left">
         {min}:{sec}
-        <audio>
-          <source src="./beep-06.wav" />
+        <audio id="beep">
+          <source src="./mixkit-sport-start-bleeps-918.wav" />
         </audio>
       </div>
 
