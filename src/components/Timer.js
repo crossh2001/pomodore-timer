@@ -13,8 +13,6 @@ export const Timer = ({ setBreakCount, breakCount, setCount, count }) => {
   let changeTitle = 0;
   const beeping = new Audio(clip);
 
-  const [session_length, setSession_length] = useState(min);
-  const [break_length, setBreak_length]= useState(bmin);
   const [minute, SetMinute] = useState(min);
 
   if(sec<10){
@@ -58,18 +56,15 @@ export const Timer = ({ setBreakCount, breakCount, setCount, count }) => {
 
             if (sec == 0) {
               if (min != 0) {
+                min = count - 1;
                 sec = 59;
-                min = min - 1;
-                setSeconds(59);
-                //setMin(min);
+                setSeconds(sec);
               }else{
                 if(sec==0){
                   if(bmin != 0){
+                    bmin = breakCount - 1;
                     sec = 59;
-                    bmin = bmin - 1;
-                    setSeconds(59);
-                    //setBmin(bmin);
-                    
+                    setSeconds(sec);                    
                   }
                 }
               }
@@ -90,17 +85,10 @@ export const Timer = ({ setBreakCount, breakCount, setCount, count }) => {
               changeTitle=changeTitle+1;
             }
 
-            if(bmin == 0 && min == 0 && sec == 0){
+            if(bmin == 0 && min == 0 && sec == 0 && toggle==0){
               min=count;
               bmin=breakCount;
             }
-
-            console.log("min is "+ min );
-            console.log("sec is "+ sec );
-            console.log("session_length is "+ session_length );
-            console.log("break_length is "+ break_length );
-
-            console.log("changeTitle is "+ changeTitle );
 
           }, 1000);
         }else{
@@ -113,12 +101,9 @@ export const Timer = ({ setBreakCount, breakCount, setCount, count }) => {
     clearInterval(interval.current);
     setBreakCount(5);
     setCount(25);
-    setSession_length(count);
-    setBreak_length(breakCount);
     setSeconds(0);
     setTitle("Session");
     SetMinute(25);
-    console.log('Session: ' + count + '  Break: ' + breakCount);
   };
 
   return (
