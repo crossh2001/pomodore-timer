@@ -12,8 +12,10 @@ export const Timer = ({ setBreakCount, breakCount, setCount, count }) => {
   let sec = seconds;
   let changeTitle = 0;
   const beeping = new Audio(clip);
-  const session_length = min;
-  const break_length = bmin;
+
+  const [session_length, setSession_length] = useState(min);
+  const [break_length, setBreak_length]= useState(bmin);
+  const [minute, SetMinute] = useState(min);
 
   if(sec<10){
     sec="0"+seconds;
@@ -41,16 +43,16 @@ export const Timer = ({ setBreakCount, breakCount, setCount, count }) => {
     clearInterval(interval?.current);
         if(toggle==0){
           interval.current = setInterval(function () {
-            console.log(min + ' : ' + sec);
-
             if(changeTitle>1){
               changeTitle=0;
             }
 
             if(changeTitle==0){
                 setTitle("Session");
+                SetMinute(min);
             }else{
               setTitle("Break");
+              SetMinute(bmin);
             }            
 
 
@@ -58,14 +60,15 @@ export const Timer = ({ setBreakCount, breakCount, setCount, count }) => {
               if (min != 0) {
                 sec = 59;
                 min = min - 1;
-                setCount(min);
+                setSeconds(59);
+                //setMin(min);
               }else{
                 if(sec==0){
                   if(bmin != 0){
                     sec = 59;
                     bmin = bmin - 1;
                     setSeconds(59);
-                    setBreakCount(bmin);
+                    //setBmin(bmin);
                     
                   }
                 }
@@ -75,21 +78,29 @@ export const Timer = ({ setBreakCount, breakCount, setCount, count }) => {
               setSeconds(sec);
             }
 
-            if(sec== 0 && min == 0){
+            if(sec == 0 && min == 0){
               beeping.play();
-              changeTitle=1;
-              bmin=break_length;
+              changeTitle=changeTitle+1;
             }
 
-            console.log("after loop bmin "+bmin);
+            console.log("bmin is "+ bmin );
 
-            if(sec== 0 && bmin == 0){
+            if(sec == 0 && bmin == 0){
               beeping.play();
-              changeTitle=0;
-              min=session_length;
+              changeTitle=changeTitle+1;
             }
 
-            console.log("after loop min is "+min);
+            if(bmin == 0 && min == 0 && sec == 0){
+              min=count;
+              bmin=breakCount;
+            }
+
+            console.log("min is "+ min );
+            console.log("sec is "+ sec );
+            console.log("session_length is "+ session_length );
+            console.log("break_length is "+ break_length );
+
+            console.log("changeTitle is "+ changeTitle );
 
           }, 1000);
         }else{
@@ -102,8 +113,11 @@ export const Timer = ({ setBreakCount, breakCount, setCount, count }) => {
     clearInterval(interval.current);
     setBreakCount(5);
     setCount(25);
+    setSession_length(count);
+    setBreak_length(breakCount);
     setSeconds(0);
     setTitle("Session");
+    SetMinute(25);
     console.log('Session: ' + count + '  Break: ' + breakCount);
   };
 
@@ -111,7 +125,7 @@ export const Timer = ({ setBreakCount, breakCount, setCount, count }) => {
     <>
       <div id="timer-label">{title}</div>
       <div id="time-left">
-        {min}:{sec}
+        {minute}:{sec}
         <audio id="beep">
           <source src="./mixkit-sport-start-bleeps-918.wav" />
         </audio>
