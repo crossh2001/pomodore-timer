@@ -19,13 +19,6 @@ export const Timer = ({ setBreakCount, breakCount, setCount, count }) => {
     sec="0"+seconds;
   }
   
-  if(min<10){
-    min="0"+min;
-  }
-
-  if(bmin<10){
-    bmin="0"+bmin;
-  }
 
 
   let toggle = 0;
@@ -55,6 +48,11 @@ export const Timer = ({ setBreakCount, breakCount, setCount, count }) => {
             if (sec == 0) {
               if (min != 0) {
                 min = count - 1;
+                
+                if(min<10){
+                  min="0"+min;
+                }
+
                 SetMinute(min);
                 sec = 59;
                 setSeconds(sec);
@@ -62,6 +60,11 @@ export const Timer = ({ setBreakCount, breakCount, setCount, count }) => {
                 if(sec==0){
                   if(bmin != 0){
                     bmin = breakCount - 1;
+                    
+                    if(bmin<10){
+                      bmin="0"+bmin;
+                    }
+
                     SetMinute(min);
                     sec = 59;
                     setSeconds(sec);                    
