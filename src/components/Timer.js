@@ -47,22 +47,22 @@ export const Timer = ({ setBreakCount, breakCount, setCount, count }) => {
 
             if(changeTitle==0){
                 setTitle("Session");
-                SetMinute(min);
             }else{
               setTitle("Break");
-              SetMinute(bmin);
             }            
 
 
             if (sec == 0) {
               if (min != 0) {
                 min = count - 1;
+                SetMinute(min);
                 sec = 59;
                 setSeconds(sec);
               }else{
                 if(sec==0){
                   if(bmin != 0){
                     bmin = breakCount - 1;
+                    SetMinute(min);
                     sec = 59;
                     setSeconds(sec);                    
                   }
