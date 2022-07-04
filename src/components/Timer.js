@@ -10,11 +10,17 @@ export const Timer = ({ setBreakCount, breakCount, setCount, count }) => {
   let min = count;
   let bmin= breakCount;
   let sec = seconds;
-  let changeTitle = 0;
+  //let changeTitle = 0;
+
+
   const beeping = new Audio(clip);
 
   const [minute, SetMinute] = useState(min);
-
+  
+  useEffect(()=>{
+    min=count;
+    SetMinute(count);
+  }, [count])
   if(sec<10){
     sec="0"+seconds;
   }
@@ -34,24 +40,20 @@ export const Timer = ({ setBreakCount, breakCount, setCount, count }) => {
     clearInterval(interval?.current);
         if(toggle==0){
           interval.current = setInterval(function () {
-            if(changeTitle>1){
-              changeTitle=0;
-            }
+                
 
-            if(changeTitle==0){
-                setTitle("Session");
-            }else{
-              setTitle("Break");
-            }            
-
+            console.log("JUST testing out min="+min+" & bmin="+bmin);
 
             if (sec == 0) {
+              
               if (min != 0) {
-                min = count - 1;
+                min = min-1;
                 
                 if(min<10){
                   min="0"+min;
                 }
+
+                console.log("min="+min+" sec="+sec);
 
                 SetMinute(min);
                 sec = 59;
@@ -59,13 +61,13 @@ export const Timer = ({ setBreakCount, breakCount, setCount, count }) => {
               }else{
                 if(sec==0){
                   if(bmin != 0){
-                    bmin = breakCount - 1;
+                    bmin = bmin - 1;
                     
                     if(bmin<10){
                       bmin="0"+bmin;
                     }
 
-                    SetMinute(min);
+                    SetMinute(bmin);
                     sec = 59;
                     setSeconds(sec);                    
                   }
@@ -78,20 +80,22 @@ export const Timer = ({ setBreakCount, breakCount, setCount, count }) => {
 
             if(sec == 0 && min == 0){
               beeping.play();
-              changeTitle=changeTitle+1;
+              setTitle("Break");
+              bmin=breakCount;
             }
 
             console.log("bmin is "+ bmin );
 
-            if(sec == 0 && bmin == 0){
+            if(sec == 0 && bmin == "0"+0){
               beeping.play();
-              changeTitle=changeTitle+1;
-            }
+              setTitle("Session");
+              min=count;
+              }
 
-            if(bmin == 0 && min == 0 && sec == 0 && toggle==0){
+            /*if(bmin == 0 && min == 0 && sec == 0 && toggle==0){
               min=count;
               bmin=breakCount;
-            }
+            }*/
 
           }, 1000);
         }else{

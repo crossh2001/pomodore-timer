@@ -8,6 +8,8 @@ export const Session = ({setCount, count}) =>{
         if(count<60){
             setCount(count => count+1);
             console.log("add "+count);
+        }else{
+            setCount(60);
         }
     }
 
@@ -15,6 +17,8 @@ export const Session = ({setCount, count}) =>{
         if(count>1){
             setCount(count => count-1);
             console.log("subtract "+count);
+        }else{
+            setCount(1);
         }
     }
 

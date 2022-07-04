@@ -6,14 +6,16 @@ export const Breaks = ({setBreakCount,breakCount}) =>{
         const addBreaks = () =>{
         if(breakCount<60){
             setBreakCount(breakCount => breakCount+1);
-            console.log("add "+breakCount);
+        }else{
+            setBreakCount(60);
         }
     }
 
     const subtractBreaks = () =>{
         if(breakCount>1){
             setBreakCount(breakCount => breakCount-1);
-            console.log("subtract "+breakCount);
+        }else{
+            setBreakCount(1);
         }
     }
 
