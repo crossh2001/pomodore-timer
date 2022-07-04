@@ -46,7 +46,7 @@ export const Timer = ({ setBreakCount, breakCount, setCount, count }) => {
 
             if (sec == 0) {
               
-              if (min != 0) {
+              if (min >= 0) {
                 min = min-1;
                 
                 if(min<10){
@@ -60,16 +60,16 @@ export const Timer = ({ setBreakCount, breakCount, setCount, count }) => {
                 setSeconds(sec);
               }else{
                 if(sec==0){
-                  if(bmin != 0){
-                    bmin = bmin - 1;
-                    
-                    if(bmin<10){
-                      bmin="0"+bmin;
-                    }
+                  if(bmin >= 0){
+                        bmin = bmin - 1;
+                        
+                        if(bmin<10){
+                          bmin="0"+bmin;
+                        }
 
-                    SetMinute(bmin);
-                    sec = 59;
-                    setSeconds(sec);                    
+                        SetMinute(bmin);
+                        sec = 59;
+                        setSeconds(sec);                    
                   }
                 }
               }
@@ -78,10 +78,13 @@ export const Timer = ({ setBreakCount, breakCount, setCount, count }) => {
               setSeconds(sec);
             }
 
-            if(sec == 0 && min == 0){
+            console.log("min is "+ min );
+
+            if(sec == 0 && min == "0"+0){
               beeping.play();
               setTitle("Break");
               bmin=breakCount;
+              SetMinute(bmin);
             }
 
             console.log("bmin is "+ bmin );
@@ -90,6 +93,7 @@ export const Timer = ({ setBreakCount, breakCount, setCount, count }) => {
               beeping.play();
               setTitle("Session");
               min=count;
+              SetMinute(min);
               }
 
             /*if(bmin == 0 && min == 0 && sec == 0 && toggle==0){
