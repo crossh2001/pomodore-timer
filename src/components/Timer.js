@@ -1,7 +1,12 @@
 import '../App.css';
 import moment from 'moment';
+import momentDurationFormatSetup from 'moment-duration-format';
 import { useEffect, useRef, useState } from 'react';
 import clip from "./mixkit-sport-start-bleeps-918.wav";
+
+momentDurationFormatSetup(moment)
+
+
 
 export const Timer = ({ setBreakCount, breakCount, setCount, count }) => {
   const [seconds, setSeconds] = useState(0);
@@ -15,6 +20,8 @@ export const Timer = ({ setBreakCount, breakCount, setCount, count }) => {
   const beeping = new Audio(clip);
 
   const [minute, SetMinute] = useState(min);
+
+  const formattedTimeLeft = moment.duration(minute).format('mm:ss');
   
   useEffect(()=>{
     min=count;
@@ -115,7 +122,7 @@ export const Timer = ({ setBreakCount, breakCount, setCount, count }) => {
     <>
       <div id="timer-label">{title}</div>
       <div id="time-left">
-        {minute}:{sec}
+        {formattedTimeLeft}:{sec}
         <audio id="beep">
           <source src="./mixkit-sport-start-bleeps-918.wav" />
         </audio>
