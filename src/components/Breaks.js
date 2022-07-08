@@ -1,24 +1,26 @@
 import '../App.css';
+import moment from 'moment';
 import {useState} from 'react';
 
 export const Breaks = ({setBreakCount,breakCount}) =>{
 
         const addBreaks = () =>{
-        if(breakCount<60){
-            setBreakCount(breakCount => breakCount+1);
-        }else{
-            setBreakCount(60);
-        }
+      //  if(breakCount<60){
+            setBreakCount(breakCount => breakCount+60);
+        //}else{
+          //  setBreakCount(60);
+        //}
     }
 
     const subtractBreaks = () =>{
-        if(breakCount>1){
-            setBreakCount(breakCount => breakCount-1);
-        }else{
-            setBreakCount(1);
-        }
+        //if(breakCount>1){
+            setBreakCount(breakCount => breakCount-60);
+        //}else{
+         //   setBreakCount(1);
+       // }
     }
 
+    const breakLengthInMinute = moment.duration(breakCount, 's').minutes();
     
     return(
         <>
@@ -28,7 +30,7 @@ export const Breaks = ({setBreakCount,breakCount}) =>{
                 width="20px" height="20px"
                 onClick={()=>subtractBreaks()}/>
 
-                <div id="break-length">{breakCount}</div>
+                <div id="break-length">{breakLengthInMinute}</div>
 
                 <img id="break-increment" 
                 src="https://www.pngitem.com/pimgs/m/29-297862_green-arrow-up-green-arrow-icon-png-transparent.png" 

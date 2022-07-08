@@ -1,4 +1,5 @@
 import '../App.css';
+import moment from 'moment';
 import { useEffect, useRef, useState } from 'react';
 import clip from "./mixkit-sport-start-bleeps-918.wav";
 
@@ -10,9 +11,7 @@ export const Timer = ({ setBreakCount, breakCount, setCount, count }) => {
   let min = count;
   let bmin= breakCount;
   let sec = seconds;
-  //let changeTitle = 0;
-
-
+  
   const beeping = new Audio(clip);
 
   const [minute, SetMinute] = useState(min);
@@ -42,7 +41,8 @@ export const Timer = ({ setBreakCount, breakCount, setCount, count }) => {
           interval.current = setInterval(function () {
                 
 
-            console.log("JUST testing out min="+min+" & bmin="+bmin);
+            console.log("JUST testing out minute="+minute+" min="+
+            min+" & bmin="+bmin+" title="+title);
 
             if (sec == 0) {
               
@@ -52,8 +52,6 @@ export const Timer = ({ setBreakCount, breakCount, setCount, count }) => {
                 if(min<10){
                   min="0"+min;
                 }
-
-                console.log("min="+min+" sec="+sec);
 
                 SetMinute(min);
                 sec = 59;
@@ -67,6 +65,8 @@ export const Timer = ({ setBreakCount, breakCount, setCount, count }) => {
                           bmin="0"+bmin;
                         }
 
+                        console.log("break got subtracted");
+
                         SetMinute(bmin);
                         sec = 59;
                         setSeconds(sec);                    
@@ -78,28 +78,22 @@ export const Timer = ({ setBreakCount, breakCount, setCount, count }) => {
               setSeconds(sec);
             }
 
-            console.log("min is "+ min );
-
-            if(sec == 0 && min == "0"+0){
+            if(sec == 0 && min == "00"){
               beeping.play();
               setTitle("Break");
               bmin=breakCount;
               SetMinute(bmin);
             }
 
-            console.log("bmin is "+ bmin );
-
-            if(sec == 0 && bmin == "0"+0){
+            
+            if(sec == 0 && bmin == "00"){
               beeping.play();
               setTitle("Session");
               min=count;
               SetMinute(min);
+              console.log("code in Session");
               }
 
-            /*if(bmin == 0 && min == 0 && sec == 0 && toggle==0){
-              min=count;
-              bmin=breakCount;
-            }*/
 
           }, 1000);
         }else{
