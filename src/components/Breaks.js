@@ -5,19 +5,19 @@ import {useState} from 'react';
 export const Breaks = ({setBreakCount,breakCount}) =>{
 
         const addBreaks = () =>{
-      //  if(breakCount<60){
+        if(breakCount<3600){
             setBreakCount(breakCount => breakCount+60);
-        //}else{
-          //  setBreakCount(60);
-        //}
+        }else{
+            setBreakCount(3600);
+        }
     }
 
     const subtractBreaks = () =>{
-        //if(breakCount>1){
+        if(breakCount>60){
             setBreakCount(breakCount => breakCount-60);
-        //}else{
-         //   setBreakCount(1);
-       // }
+        }else{
+            setBreakCount(60);
+        }
     }
 
     const breakLengthInMinute = moment.duration(breakCount, 's').minutes();

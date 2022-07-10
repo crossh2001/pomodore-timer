@@ -6,21 +6,21 @@ export const Session = ({setCount, count}) =>{
 
 
     const addSession = () =>{
-     //   if(count<60){
+        if(count<3600){
             setCount(count => count+60);
             console.log("add Session"+count);
-       // }else{
-         //   setCount(60);
-        //}
+        }else{
+            setCount(3600);
+        }
     }
 
     const subtractSession = () =>{
-        //if(count>1){
+        if(count>60){
             setCount(count => count-60);
             console.log("subtract Session"+count);
-        //}else{
-         //   setCount(1);
-       // }
+        }else{
+            setCount(60);
+        }
     }
 
     const sessionLengthInMinute = moment.duration(count, 's').minutes();

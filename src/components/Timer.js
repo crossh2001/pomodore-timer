@@ -21,7 +21,7 @@ export const Timer = ({ setBreakCount, breakCount, setCount, count }) => {
 
   const [minute, SetMinute] = useState(min);
 
-  const formattedTimeLeft = moment.duration(minute).format('mm:ss');
+  const formattedTimeLeft = moment.duration(minute, 's').format('mm:ss');
   
   useEffect(()=>{
     min=count;
@@ -111,11 +111,11 @@ export const Timer = ({ setBreakCount, breakCount, setCount, count }) => {
 
   const reset = () => {
     clearInterval(interval.current);
-    setBreakCount(5);
-    setCount(25);
+    setBreakCount(300);
+    setCount(3600);
     setSeconds(0);
     setTitle("Session");
-    SetMinute(25);
+    SetMinute(3600);
   };
 
   return (
