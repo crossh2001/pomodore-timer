@@ -9,6 +9,9 @@ function App() {
 
   const [breakCount, setBreakCount]=useState(300);
   const [count, setCount]=useState(60*25);
+  const [minute, setMinute] = useState(count);
+  const [title, setTitle] = useState("Session");
+
  
   return (
     <div className="App">
@@ -16,7 +19,8 @@ function App() {
       <Break setBreakCount={setBreakCount} breakCount={breakCount}/>
       <Session setCount={setCount} count={count}/>
       <Timer setBreakCount={setBreakCount} breakCount={breakCount} 
-      setCount={setCount} count={count}/>
+      setCount={setCount} count={count} minute={minute}
+      setMinute={setMinute} title={title} setTitle={setTitle}/>
          </div>
   );
 }

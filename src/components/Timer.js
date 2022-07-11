@@ -8,29 +8,22 @@ momentDurationFormatSetup(moment)
 
 
 
-export const Timer = ({ setBreakCount, breakCount, setCount, count }) => {
-  const [seconds, setSeconds] = useState(0);
-  const [title, setTitle] = useState("Session");
+export const Timer = ({ setBreakCount, breakCount, setCount, count, minute, setMinute, 
+title, setTitle}) => {
+  //const [title, setTitle] = useState("Session");
   let interval = useRef();
 
   let min = count;
   let bmin= breakCount;
-  let sec = seconds;
   
   const beeping = new Audio(clip);
 
-  const [minute, SetMinute] = useState(min);
-
-  const formattedTimeLeft = moment.duration(minute, 's').format('mm:ss');
+  const formattedTimeLeft = moment.duration(minute, 's').format('mm:ss',{trim: false});
   
   useEffect(()=>{
     min=count;
-    SetMinute(count);
+    setMinute(count);
   }, [count])
-  if(sec<10){
-    sec="0"+seconds;
-  }
-  
 
 
   let toggle = 0;
@@ -51,55 +44,33 @@ export const Timer = ({ setBreakCount, breakCount, setCount, count }) => {
             console.log("JUST testing out minute="+minute+" min="+
             min+" & bmin="+bmin+" title="+title);
 
-            if (sec == 0) {
-              
-              if (min >= 0) {
-                min = min-1;
+            if (minute > 0) {
+              minute = minute-1;
                 
-                if(min<10){
-                  min="0"+min;
-                }
 
-                SetMinute(min);
-                sec = 59;
-                setSeconds(sec);
-              }else{
-                if(sec==0){
-                  if(bmin >= 0){
-                        bmin = bmin - 1;
-                        
-                        if(bmin<10){
-                          bmin="0"+bmin;
-                        }
-
-                        console.log("break got subtracted");
-
-                        SetMinute(bmin);
-                        sec = 59;
-                        setSeconds(sec);                    
-                  }
-                }
-              }
+                setMinute(minute);
+              
             } else {
-              sec = sec - 1;
-              setSeconds(sec);
-            }
 
-            if(sec == 0 && min == "00"){
-              beeping.play();
-              setTitle("Break");
-              bmin=breakCount;
-              SetMinute(bmin);
-            }
-
-            
-            if(sec == 0 && bmin == "00"){
-              beeping.play();
-              setTitle("Session");
-              min=count;
-              SetMinute(min);
-              console.log("code in Session");
+              if(title == "Session"){
+                
+                console.log("test 1 got called title="+title);
+                  title="Break";  
+                  minute=breakCount;
+                  setTitle("Break");
+                  setMinute(minute);
+              }else{
+                console.log("test got called title="+title);
+                title="Session";
+                minute=count;
+                setTitle(title);
+                setMinute(minute);
               }
+            }
+
+            if(minute == 0){
+              beeping.play();
+            }
 
 
           }, 1000);
@@ -112,17 +83,16 @@ export const Timer = ({ setBreakCount, breakCount, setCount, count }) => {
   const reset = () => {
     clearInterval(interval.current);
     setBreakCount(300);
-    setCount(3600);
-    setSeconds(0);
+    setCount(1500);
     setTitle("Session");
-    SetMinute(3600);
+    setMinute(1500);
   };
 
   return (
     <>
       <div id="timer-label">{title}</div>
       <div id="time-left">
-        {formattedTimeLeft}:{sec}
+        {formattedTimeLeft}
         <audio id="beep">
           <source src="./mixkit-sport-start-bleeps-918.wav" />
         </audio>
